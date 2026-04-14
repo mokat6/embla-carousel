@@ -71,3 +71,23 @@ export default defineConfig([
   },
 ])
 ```
+
+
+```
+const handler = async () => {
+    const res = fetch("https://j2eed1kq0g.execute-api.eu-north-1.amazonaws.com/tts", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ text: messages }),
+    })
+      .then((res) => res.blob())
+      .then((data) => {
+        console.log("audio base64: ", data);
+
+        const audio = new Audio();
+
+        audio.src = URL.createObjectURL(data);
+        audio.play();
+      });
+  };
+```
